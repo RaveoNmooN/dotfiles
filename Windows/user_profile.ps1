@@ -3,7 +3,7 @@ Import-Module posh-git
 Import-Module oh-my-posh
 
 # Set Theme
-Set-PoshPrompt sonicboom_dark
+Set-PoshPrompt night-owl
 
 # Import Terminal-Icons
 Import-Module -Name Terminal-Icons
@@ -20,4 +20,5 @@ Set-PsFzfOption -PSReadLineChordProvider 'Ctrl+f' -PSReadLineChordReverseHistory
 Set-Alias vim nvim
 Set-Alias ll ls
 Set-Alias grep findstr
-#Set-Alias less 'D:\Git\usr\bin\less.exe'
+Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
+Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'

@@ -1,0 +1,34 @@
+# gitconfig
+[core]
+	autocrlf = true
+	editor = code --wait # or vim, nano, etc
+[init]
+    defaultBranch = main
+# Configure colors
+[color]
+	ui = auto
+# Add a new alias under [alias]
+[alias]
+	p = push
+	s = status
+	logp = log --decorate --all --graph
+	logl = log -1 HEAD --decorate --graph
+    logone = log --decorate --all --graph --oneline
+	fs = !git fetch && git status -uno
+	tags = show-ref --tags
+	c = commit -am
+	ca = !git add -A && git commit -m
+    confc = config --list
+	confce = config --edit
+	confl = config --local --list
+    confle = config --local --edit
+	confg = config --global --list
+	confge = config --global --edit 
+	confs = config --system --list
+# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+# Amend the currently staged files to the latest commit (without changing the commit message)
+	amend = commit --amend --reuse-message=HEAD
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1

@@ -32,3 +32,7 @@
 [help]
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
+# Configure the given name as the author name and email address to be used with your commits.
+[user]
+	name = username
+	email = email

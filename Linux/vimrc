@@ -1,0 +1,23 @@
+" Disable compatibility with vi which can cause unexpected issues.
+ set nocompatible
+
+" Turn syntax highlighting on.
+ syntax on
+
+" Add numbers to each line on the left-hand side.
+" set number
+
+" Highlight cursor line underneath the cursor horizontally.
+" set cursorline
+
+" Highlight cursor line underneath the cursor vertically.
+" set cursorcolumn
+
+" Adding two spaces identation for editing of YAML files. Identation is called with tab key
+ autocmd FileType yaml setlocal ai ts=2 sw=2 et
+
+" Set theme for bash scripting
+ set bg=dark
+
+" Adding the option to write _sh, press tab key and automatically receive the alias #!/bin/bash
+ abbr _sh #!/bin/bash

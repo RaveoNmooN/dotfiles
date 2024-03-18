@@ -1,0 +1,7 @@
+# Customize the PS1 profile to have a more colorful and informative prompt
+export PS1='\[\e[0m\][\[\e[0;1;38;5;253m\]\u\[\e[0;1;38;5;98m\]@\[\e[0;1;38;5;98m\]\H\[\e[0m\]] \[\e[0;38;5;214m\]\t \[\e[0;1;38;5;75m\]\w \[\e[0;38;5;34m\]$(git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)\[\e[0;38;5;253m\]# \[\e[0m\]'
+
+alias d='docker $*'
+alias d-c='docker-compose $*'
+alias k='kubectl $*'
+alias g='git $*'

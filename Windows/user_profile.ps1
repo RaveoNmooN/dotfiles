@@ -1,45 +1,87 @@
-# Changing the Prompt Shell View via oh-my-posh and Terminal-Icons module for PowerShell Core
+# Import Modules
+$modules = @('posh-git', 'Terminal-Icons', 'Z', 'PSFzf')
+foreach ($module in $modules) {
+    try {
+        Import-Module $module -ErrorAction Stop
+    } catch {
+        Write-Warning "Could not import module: $module"
+    }
+}
 
-oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json' | Invoke-Expression
-
-# Import Terminal-Icons and Z module
-Import-Module -Name Terminal-Icons
-Import-Module -Name Z
-
-# PSReadLine settings
+# PSReadLine configuration
 Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle InlineView
+Set-PSReadLineOption -EditMode Windows
 
-# Fzf settings
-Import-Module PSFzf
-Set-PsFzfOption -PSReadLineChordProvider 'Ctrl+f' -PSReadLineChordReverseHistory 'Ctrl+r'
+# Set up PSReadLine key bindings for Fzf
+if (Get-Module -Name PSFzf) {
+    Set-PsFzfOption -PSReadLineChordProvider 'Ctrl+f' -PSReadLineChordReverseHistory 'Ctrl+r'
+}
 
-# Alias for common commands and tools
-Set-Alias vim nvim
-Set-Alias ll ls
-Set-Alias grep findstr
-Set-Alias g git
-Set-Alias k kubectl
+# Aliases
+$aliases = @{
+    'vim'   = 'nvim'
+    'll'    = 'ls'
+    'grep'  = 'findstr'
+    'g'     = 'git'
+    'k'     = 'kubectl'
+    'ls'    = 'Get-ChildItem'
+    'cat'   = 'Get-Content'
+    'rm'    = 'Remove-Item'
+    'mv'    = 'Move-Item'
+    'df'    = 'Get-PSDrive'
+}
+foreach ($alias in $aliases.GetEnumerator()) {
+    Set-Alias -Name $alias.Key -Value $alias.Value
+}
 
-# Auto-completion for powershell and kubectl
-kubectl completion powershell | Out-String | Invoke-Expression
+# Auto-completion for powershell
+if (Get-Command kubectl -ErrorAction SilentlyContinue) {
+    kubectl completion powershell | Out-String | Invoke-Expression
+}
 
-# Function that removes command/s from history based on match of a pattern if confidentioal commands were executed in the shell by mistake
-# Usage example:
+# Function that removes command/s from history based on match of a pattern
+# Usage example: 
 # Remove-CommandFromHistory "vault operator unseal"
 function Remove-CommandFromHistory {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$pattern
     )
-
-    # Remove from PSReadLine history
+    
     $historyPath = (Get-PSReadlineOption).HistorySavePath
-    $history = Get-Content $historyPath
-    $filteredHistory = $history | Where-Object { $_ -notmatch $pattern }
-    $filteredHistory | Set-Content $historyPath
+    if (Test-Path $historyPath) {
+        $history = Get-Content $historyPath
+        $filteredHistory = $history | Where-Object { $_ -notmatch $pattern }
+        $filteredHistory | Set-Content $historyPath
+    } else {
+        Write-Warning "History file not found at: $historyPath"
+    }
+}
 
-    # Remove from current shell session history
-    $history = Get-History
-    $filteredHistory = $history | Where-Object { $_.CommandLine -notmatch $pattern }
-    Clear-History
-    $filteredHistory | Add-History
+# Miniconda initialization
+$condaPath = Join-Path $HOME "miniconda3\shell\condabin\conda-hook.ps1"
+if (Test-Path $condaPath) {
+    . $condaPath
+} else {
+    Write-Warning "Conda hook script not found at: $condaPath"
+}
+
+# Oh My Posh initialization
+$localThemePath = Join-Path $HOME ".poshthemes\jandedobbeleer.omp.json"
+if (Test-Path $localThemePath) {
+    oh-my-posh init pwsh --config $localThemePath | Invoke-Expression
+} else {
+    Write-Warning "Oh My Posh theme file not found at: $localThemePath"
+    $remoteThemePath = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json"
+    oh-my-posh init pwsh --config $remoteThemePath | Invoke-Expression
+}
+
+function Update-OhMyPoshTheme {
+    param(
+        [string]$Url = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json",
+        [string]$Destination = "$HOME\.poshthemes\jandedobbeleer.omp.json"
+    )
+    Invoke-WebRequest -Uri $Url -OutFile $Destination
+    Write-Host "Theme updated at $Destination"
 }

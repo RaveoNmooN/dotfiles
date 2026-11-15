@@ -96,3 +96,18 @@ You also can save it as a separate file and called it from your $PROFILE, adjust
 ```powershell
 code $PROFILE | Out-File -Append $env:USERPROFILE\.config\powershell\user_profile.ps1
 ```
+
+## 12. Set the Git defaults and aliases
+
+Copy [.gitconfig](.gitconfig) to your user profile. It contains the aliases and `core.autocrlf = true`, so files are checked out with CRLF and committed with LF.
+
+```powershell
+Copy-Item .\.gitconfig $env:USERPROFILE\.gitconfig
+```
+
+The file holds no name or e-mail. Set them once in `.gitconfig.local`, which the copied file includes and which stays on this machine:
+
+```powershell
+git config --file $env:USERPROFILE\.gitconfig.local user.name "Your Name"
+git config --file $env:USERPROFILE\.gitconfig.local user.email "you@example.com"
+```

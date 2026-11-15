@@ -1,0 +1,70 @@
+# Taps supplying the installed packages.
+tap "anomalyco/tap"
+tap "derailed/k9s"
+tap "fairwindsops/tap"
+tap "fluxcd/tap"
+tap "hashicorp/tap"
+tap "jandedobbeleer/oh-my-posh"
+tap "minamijoyo/hcledit"
+tap "robusta-dev/krr"
+tap "skyhook-io/tap"
+tap "terraform-linters/tap"
+
+# CLI tools and runtimes
+brew "argocd"
+brew "bat"
+brew "checkov"
+brew "eksctl"
+brew "fluxcd/tap/flux", trusted: true
+brew "fzf"
+brew "gh"
+brew "git-cliff"
+brew "gitleaks"
+brew "gnupg"
+brew "minamijoyo/hcledit/hcledit", trusted: true
+brew "helm"
+brew "imagemagick"
+brew "infracost"
+brew "jq"
+brew "derailed/k9s/k9s", trusted: true
+brew "knock"
+brew "kor"
+brew "robusta-dev/krr/krr", trusted: true
+brew "kubecm"
+brew "kubeconform"
+brew "kubectx"
+brew "kubent"
+brew "kubernetes-cli"
+brew "kustomize"
+brew "lsd"
+brew "minikube"
+brew "neovim"
+brew "jandedobbeleer/oh-my-posh/oh-my-posh", trusted: true
+brew "anomalyco/tap/opencode", trusted: true
+brew "openjdk@21"
+brew "hashicorp/tap/packer", trusted: true
+brew "fairwindsops/tap/pluto", trusted: true
+brew "pre-commit"
+brew "python@3.14"
+brew "ripgrep"
+brew "shellcheck"
+brew "telnet"
+brew "hashicorp/tap/terraform", trusted: true
+brew "terraform-docs"
+brew "tfsec"
+brew "tfupdate"
+brew "tree"
+brew "trivy"
+brew "hashicorp/tap/vault", trusted: true
+brew "watch"
+brew "yamllint"
+brew "yq"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# Applications and packaged CLI
+cask "1password-cli"
+cask "bruno"
+cask "dbeaver-community"
+cask "skyhook-io/tap/radar-desktop", trusted: true
+cask "terraform-linters/tap/tflint", trusted: true

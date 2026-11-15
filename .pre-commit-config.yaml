@@ -1,0 +1,116 @@
+---
+minimum_pre_commit_version: "4.4.0"
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+
+default_stages: [pre-commit]
+
+repos:
+  # Generic Mutating File Fixers
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim Trailing Whitespace
+      - id: end-of-file-fixer
+        name: Fix End of File
+      - id: mixed-line-ending
+        name: Enforce LF line endings
+        args: [--fix=lf]
+
+  # Python Mutating Hooks - Ruff is a fast Python linter and formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.15
+    hooks:
+      - id: ruff
+        name: Python Lint - Ruff
+        args: [--fix]
+        files: \.py$
+      - id: ruff-format
+        name: Python Format - Ruff
+        files: \.py$
+
+  # Syntax Validation
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+        name: Check Yaml Syntax
+        args:
+          - --allow-multiple-documents
+      - id: check-json
+        name: Check JSON Syntax
+      - id: check-toml
+        name: Check TOML Syntax
+
+  # YAML Validation
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        name: YAML Lint - yamllint
+        args:
+          - -c
+          - .yamllint.yaml
+        files: \.ya?ml$
+
+  # Shell Validation - ShellCheck lints Bash; ec2.zsh and .bashrc are checked as Bash
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        name: Shell Lint - ShellCheck
+        # Settings (following `source` lines) come from .shellcheckrc.
+        files: (\.sh|/ec2\.zsh|/\.bashrc)$
+        types: [text]
+
+  # Zsh Validation - ShellCheck does not support Zsh, so only the syntax is checked
+  - repo: local
+    hooks:
+      - id: zsh-syntax
+        name: Zsh Syntax Check (zsh -n)
+        language: unsupported
+        entry: sh -c 'for file in "$@"; do zsh -n "$file" || exit 1; done' --
+        files: (^|/)\.(zshrc|zprofile)$|\.zsh$
+
+  # Script Hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-executables-have-shebangs
+        name: Check Executables Have Shebangs
+      - id: check-shebang-scripts-are-executable
+        name: Check Shebang Scripts Are Executable
+        # Sourced files: the shebang only tells editors which shell they are.
+        exclude: (^|/)\.(zshrc|zprofile)$|^lib/
+      - id: check-added-large-files
+        name: Check Added Large Files
+        args: [--maxkb=500]
+
+  # Secret Scanning
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+        name: Gitleaks Secret Scanner
+
+  # General Safety Checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+        name: Check Merge Conflicts
+      - id: detect-private-key
+        name: Detect Private Key
+
+  # Conventional Commit Linter
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        name: Conventional Commit Linter
+        stages: [commit-msg]
+        args:
+          - --verbose
+...

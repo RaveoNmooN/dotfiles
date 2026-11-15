@@ -1,0 +1,7 @@
+# ShellCheck settings for this repository. Read by the pre-commit hook, by
+# editor extensions and by `shellcheck` on the command line.
+
+# Follow `source` lines, and resolve them from the directory of the script.
+# The installers source ../lib/ui.sh and ../lib/install.sh.
+external-sources=true
+source-path=SCRIPTDIR

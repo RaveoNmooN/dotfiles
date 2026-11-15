@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "**/.gitconfig": "properties",
+    "**/.gitignore_global": "ignore",
+    "**/config.example": "ssh_config",
+    "**/*.toml.example": "toml"
+  },
+  "bashIde.shellcheckPath": "",
+  "shellcheck.ignorePatterns": {
+    "**/.vimrc": true,
+    "**/.zshrc": true,
+    "**/.zprofile": true
+  }
+}

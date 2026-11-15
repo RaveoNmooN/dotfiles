@@ -1,0 +1,30 @@
+# EditorConfig: https://editorconfig.org
+# Editors read this file and write files the way the pre-commit hooks expect.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[*.ps1]
+indent_size = 4
+
+# Git writes its own config with tabs; SSH configs here follow the same style.
+[{.gitconfig,*.gitconfig,.gitattributes,config.example}]
+indent_style = tab
+
+# Tab-separated data: tabs are the separators.
+[*.tsv]
+indent_style = tab
+trim_trailing_whitespace = false
+
+# Two trailing spaces are a line break in Markdown.
+[*.md]
+trim_trailing_whitespace = false

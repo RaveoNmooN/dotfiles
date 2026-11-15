@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  LaunchAgent: applies the keyboard key swap at every login.
+  Installed to ~/Library/LaunchAgents/ by install.sh.
+
+  macOS (launchd) reads this file at login and runs the command once, as you.
+
+  The command is /usr/bin/hidutil itself, not the keyboard-remap script. macOS
+  only applies a key mapping when the program that asked for it is allowed
+  under System Settings > Privacy & Security > Input Monitoring, and a login
+  agent has no terminal to inherit that from.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.dotfiles.keyboard-remap</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/hidutil</string>
+    <string>property</string>
+    <string>--set</string>
+    <string>{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>

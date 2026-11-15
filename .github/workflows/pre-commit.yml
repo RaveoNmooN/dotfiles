@@ -1,0 +1,49 @@
+---
+# Runs the repository's pre-commit hooks on every push and pull request, so the
+# secret scan and the linters run even when the local hooks are not installed.
+name: pre-commit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pre-commit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit:
+    name: Run pre-commit hooks
+    # macOS, because the Zsh syntax hook and the macOS scripts need zsh.
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.x"
+
+      # The steps below do what pre-commit/action does. That action is not used
+      # because its latest release still calls a cache action built for the
+      # deprecated Node.js 20 runtime.
+      - name: Install pre-commit
+        run: python -m pip install pre-commit
+
+      - name: Cache the hook environments
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ env.pythonLocation }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Run all hooks
+        run: pre-commit run --all-files --show-diff-on-failure --color=always
+...

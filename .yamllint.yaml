@@ -1,0 +1,12 @@
+---
+extends: relaxed
+
+rules:
+  line-length:
+    max: 200
+    level: warning
+    # Do not warn when the long part is one word that cannot realistically be split.
+    allow-non-breakable-words: true
+    # Do not warn when the long part is an inline mapping that cannot realistically be split.
+    allow-non-breakable-inline-mappings: true
+...

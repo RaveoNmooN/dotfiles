@@ -1,0 +1,96 @@
+# ==============================================================================
+#  ~/.ssh/config - SSH client configuration
+# ==============================================================================
+#  Seeded once by install.sh from config/ssh/config.example. After that the
+#  file is yours: the installer never replaces it.
+#
+#  Keys live in 1Password and are served by its SSH agent. An IdentityFile that
+#  points at a PUBLIC key (.pub) tells SSH which agent key to offer; the private
+#  key never touches the disk. Export the public key from the 1Password item
+#  ("Download" next to the public key) into ~/.ssh/.
+#
+#  Replace every <placeholder> below. All hosts, users and addresses in the
+#  commented examples are documentation values, not real systems.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+#  Defaults for every host: use the 1Password SSH agent
+# ------------------------------------------------------------------------------
+
+Host *
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# ------------------------------------------------------------------------------
+#  GitHub (personal account)
+# ------------------------------------------------------------------------------
+
+Host github.com
+	User git
+	IdentityFile ~/.ssh/<your-github-key>.pub
+	IdentitiesOnly yes
+
+# ------------------------------------------------------------------------------
+#  Examples - uncomment and adjust
+# ------------------------------------------------------------------------------
+
+# --- Second GitHub account through a host alias ---------------------------------
+# Clone with: git clone git@github-second:<owner>/<repo>.git
+#
+# Host github-second
+# 	HostName github.com
+# 	User git
+# 	IdentityFile ~/.ssh/<second-github-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Self-hosted Git server on a custom port (Bitbucket Server style) -----------
+#
+# Host git.example.com
+# 	User git
+# 	Port 7999
+# 	IdentityFile ~/.ssh/<git-server-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Server by IP address, with its own user and key ----------------------------
+# Connect with: ssh app-server
+#
+# Host app-server
+# 	HostName 192.0.2.10
+# 	User ubuntu
+# 	IdentityFile ~/.ssh/<server-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Jump host (bastion) --------------------------------------------------------
+#
+# Host bastion
+# 	HostName bastion.example.com
+# 	User <your-user>
+# 	IdentityFile ~/.ssh/<bastion-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Host that is only reachable through the jump host --------------------------
+# Connect with: ssh db-internal   (SSH hops through "bastion" automatically)
+#
+# Host db-internal
+# 	HostName 198.51.100.20
+# 	User <your-user>
+# 	ProxyJump bastion
+# 	IdentityFile ~/.ssh/<internal-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Group of hosts that share a user and a key ---------------------------------
+# Matches web-1.example.com, web-2.example.com, ...
+#
+# Host web-*.example.com
+# 	User deploy
+# 	IdentityFile ~/.ssh/<deploy-key>.pub
+# 	IdentitiesOnly yes
+
+# --- Host that uses a key file on disk instead of the 1Password agent -----------
+# "IdentityAgent none" switches the agent off for this host only.
+#
+# Host legacy-box
+# 	HostName 203.0.113.30
+# 	User admin
+# 	IdentityAgent none
+# 	IdentityFile ~/.ssh/<private-key-file>
+# 	IdentitiesOnly yes

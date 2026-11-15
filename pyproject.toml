@@ -1,0 +1,12 @@
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors - (Basic style: indentation, whitespace, line length, syntax issues)
+    "F",    # pyflakes - (Logical errors: unused imports, undefined variables, redefined unused functions, etc.)
+    "W",    # pycodestyle warnings - (Softer style warnings: trailing whitespace, blank lines, deprecated features, etc.)
+    "N",    # pep8-naming - (Naming conventions: catches camelCase variables (N806), camelCase functions (N802), lowercase classes (N801))
+    "UP",   # pyupgrade - (Modernization: suggests newer Python syntax like f-strings over .format(), dict over Dict type hints)
+    "B",    # flake8-bugbear - (Common bugs: mutable default arguments (def f(x=[])), bare except:, unused loop variables, assert misuse)
+]
+
+[tool.ruff]
+line-length = 120

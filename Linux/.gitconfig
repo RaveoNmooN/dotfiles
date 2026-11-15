@@ -1,0 +1,45 @@
+# ==============================================================================
+#  ~/.gitconfig - Git defaults and aliases for Linux (from the dotfiles repo)
+# ==============================================================================
+#  Name, e-mail and signing are not set here. They live in ~/.gitconfig.local,
+#  which is included at the end of this file and is never tracked.
+# ==============================================================================
+
+[core]
+	# Commit LF. Convert CRLF to LF on commit, never change files on checkout.
+	autocrlf = input
+	editor = code --wait
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[alias]
+	p = push
+	s = status
+	logp = log --decorate --all --graph
+	logl = log -1 HEAD --decorate --graph
+	logone = log --decorate --all --graph --oneline
+	fs = !git fetch && git status -uno
+	tags = show-ref --tags
+	c = commit -am
+	ca = !git add -A && git commit -m
+	confc = config --list
+	confce = config --edit
+	confl = config --local --list
+	confle = config --local --edit
+	confg = config --global --list
+	confge = config --global --edit
+	confs = config --system --list
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	# Add the staged files to the latest commit, keeping its message
+	amend = commit --amend --reuse-message=HEAD
+[help]
+	# Correct and run mistyped commands after 0.1 seconds
+	autocorrect = 1
+[pull]
+	rebase = true
+
+# --- This machine: identity and signing. Read last, so it wins. -------------------
+[include]
+	path = ~/.gitconfig.local

@@ -144,31 +144,13 @@ Homebrew and the vendor installers ask for the macOS password. Identical files a
    | `keyboard-remap off` | removes the swap until the next restart |
    | `keyboard-remap on` | applies it again |
 
-   The mapping is lost at every restart, so a LaunchAgent (`~/Library/LaunchAgents/com.dotfiles.keyboard-remap.plist`) applies it at each login. It calls `/usr/bin/hidutil` directly instead of the script, so that the permission above is the only one needed. A LaunchAgent is macOS's way to run a command for you when you log in; it runs once, as you, and then exits. It is listed in System Settings → General → Login Items, under "Allow in the Background". To remove the swap for good:
-
-   ```bash
-   launchctl bootout gui/$(id -u)/com.dotfiles.keyboard-remap
-   ```
-
-   ```bash
-   rm ~/Library/LaunchAgents/com.dotfiles.keyboard-remap.plist
-   ```
-
-   Control, Option and Command are not changed by this. Swap them per keyboard in System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys. Do not run Karabiner-Elements alongside: it takes over the keyboard, and then neither this swap nor the Modifier Keys setting applies.
+   The mapping is lost at every restart, so a LaunchAgent (`~/Library/LaunchAgents/com.dotfiles.keyboard-remap.plist`) applies it at each login. It calls `/usr/bin/hidutil` directly instead of the script, so that the permission above is the only one needed. A LaunchAgent is macOS's way to run a command for you when you log in; it runs once, as you, and then exits. It is listed in System Settings → General → Login Items, under "Allow in the Background".
 
 8. **Machine-only shell settings** go in `~/.config/zsh/local.zsh`. The installer never creates or replaces that file and the shell sources it last. Use it for anything that should not be public: extra aliases, `AWS_PROFILE`, host shortcuts.
 
 ## 5. Apps to install afterwards
 
-These are installed by hand, not by the installer. The full list with sources is in [inventory/software.tsv](inventory/software.tsv). Suggested order:
-
-| Group | Apps | Why this order |
-|---|---|---|
-| Used by the shell setup | Docker Desktop, Visual Studio Code | The `d` and `dco` aliases need the Docker CLI links. Git uses `code` as its editor: in VS Code run **Shell Command: Install 'code' command in PATH**, then sign in and turn on [Settings Sync](https://code.visualstudio.com/docs/configure/settings-sync). |
-| Daily apps | Google Chrome, Raycast, AltTab, Obsidian, Claude, ChatGPT, Spotify, Zoom, Microsoft 365 | Sign in and restore settings through each app's own sync. `bh` reads the Chrome history. |
-| Engineering | Postman, Lens, DataGrip, Sourcetree, Royal TSX, KeyStore Explorer, Multipass, AnyDesk | Reconnect accounts, clusters and connections from your private backup. |
-| Hardware | DisplayLink Manager, Jabra Direct, Logi Options+ | Only on a Mac that uses the dock, headset or mouse. |
-| Optional tools | OpenTofu (`brew install opentofu`), Go toolchain (`brew install go`), Helm and gh plugins | See the inventory. |
+The apps I commonly use are not installed by the installer. Install them by hand; the list with sources is in [inventory/software.tsv](inventory/software.tsv).
 
 ## 6. AWS and EC2 helpers
 
@@ -203,8 +185,6 @@ Settings, to put in `~/.config/zsh/local.zsh`:
 | `EC2_CONNECT_1PASSWORD_VAULT` | `Private` | Vault of that item |
 | `EC2_CONNECT_1PASSWORD_FIELD` | `private key` | Field of that item |
 
-**Conda.** The installer supplies Miniconda base. The shell recognizes `/opt/miniconda3`, `~/miniconda3` and a custom `CONDA_ROOT`. Use `conda activate <name>` or the interactive `condaenv` helper.
-
 ## 7. Verify
 
 In a new terminal window:
@@ -222,7 +202,6 @@ In a new terminal window:
 ## 8. Keep the repo current
 
 - **Shell, Git and app settings**: edit the file in the repo, then run `./install.sh --files-only`. Direct edits to an installed managed file are replaced on the next run (a backup is kept).
-- **SSH hosts and 1Password keys**: edit `~/.ssh/config` and `agent.toml` on the Mac. They are never copied back, so real hosts stay out of this public repo. Add a new generic pattern to the `.example` file by hand if it is worth sharing.
 - **Software**: run `python3 scripts/inventory.py`. It compares Homebrew receipts, application bundles, common CLI paths, fonts, JDKs, plugins and Conda environments with the Brewfile and the inventory, and prints unlisted installs and declared items that are absent. Exit code 0 means no differences. The installer does not run this audit.
 - **Adding software**: add it to the [Brewfile](Brewfile), or add a row (product, source, recovery action, discovery names) to the tab-separated [inventory](inventory/software.tsv). Entries you leave out on purpose go in the [exclusion list](inventory/exclude.txt).
 - **Before committing**: the repo's pre-commit hooks scan for secrets and lint the scripts. See the [root README](../README.md#working-on-this-repo).
@@ -242,5 +221,3 @@ In a new terminal window:
 | [config/1password/agent.toml.example](config/1password/agent.toml.example) | Starter 1Password SSH agent key list. |
 | [config/](config) | Everything else that is copied to the Mac, see section 1. |
 | [inventory/](inventory) | Manually installed software and audit exclusions. |
-
-The installer runs on the stock macOS bash 3.2. Shell scripts pass `shellcheck`; the Zsh files are checked with `zsh -n`.

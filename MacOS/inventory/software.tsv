@@ -38,5 +38,5 @@ Helm mapkubeapis	Helm plugin v0.5.1	Use helm plugin install https://github.com/h
 GitHub Copilot CLI extension	GitHub CLI extension v1.1.1	Legacy github/gh-copilot is present. Restore only if needed and the release is available with gh extension install github/gh-copilot --pin v1.1.1.	gh:gh-copilot
 1Password Connect collection	Ansible Galaxy	Activate the Ansible environment and run ansible-galaxy collection install onepassword.connect:2.3.0.	galaxy:onepassword.connect
 PostgreSQL collection	Ansible Galaxy receipt only	Receipt records community.postgresql 3.7.0, but the collection directory is absent. Optional install with ansible-galaxy collection install community.postgresql:3.7.0.	receipt:community.postgresql
-OpenJDK 21 registration	Homebrew plus macOS JDK symlink	Register the Brew JDK with macOS if Java apps such as the Kafka tools need it: sudo ln -sfn "$(brew --prefix openjdk@21)/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-21.jdk	jdk:openjdk-21.jdk
+OpenJDK 21 registration	Homebrew plus macOS JDK symlink	Register the Brew JDK with macOS if Java apps such as the Kafka tools need it: sudo ln -sfn $(brew --prefix openjdk@21)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk	jdk:openjdk-21.jdk
 Homebrew	Upstream installer	Bootstrap installs Homebrew and the Brewfile.	opt:homebrew

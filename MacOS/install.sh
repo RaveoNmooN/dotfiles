@@ -379,6 +379,10 @@ install_files() {
 # the default profile and the general settings in config/iterm2/preferences.tsv.
 # iTerm2 writes its settings back when it quits, so nothing is changed while it
 # is running.
+#
+# preferences.tsv is tab-separated: a header row, then one setting per row as
+# name, type (string, bool or int) and value. It holds no comment lines, so
+# that every row has three columns and GitHub shows the file as a table.
 configure_iterm2() {
   local name kind value current wanted changed=0 same=0
   local list="${repo}/config/iterm2/preferences.tsv"
@@ -390,8 +394,13 @@ configure_iterm2() {
     ui_warn 'iTerm2 is running, so its general settings were not applied. Quit iTerm2 and run ./install.sh --files-only from Terminal.'
     return 0
   fi
+  local header=true
   while IFS=$'\t' read -r name kind value; do
-    if [[ -z ${name} || ${name} == '#'* ]]; then continue; fi
+    if "${header}"; then
+      header=false
+      continue
+    fi
+    if [[ -z ${name} ]]; then continue; fi
     wanted=${value}
     if [[ ${kind} == bool ]]; then
       if [[ ${value} == true ]]; then wanted=1; else wanted=0; fi

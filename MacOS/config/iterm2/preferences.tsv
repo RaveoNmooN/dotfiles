@@ -1,6 +1,4 @@
-# iTerm2 general settings applied by install.sh (name, type, value; tab-separated).
-# These live in macOS preferences, not in a profile. Types: string, bool, int.
-# The installer only writes them while iTerm2 is not running.
+Name	Type	Value
 Default Bookmark Guid	string	0da2e8ca-0306-5a8f-9ebe-c5f7fc3fdf1f
 TabStyleWithAutomaticOption	int	4
 HideScrollbar	bool	true

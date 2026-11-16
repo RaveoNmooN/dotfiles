@@ -1,0 +1,19 @@
+Name	Type	Value
+Default Bookmark Guid	string	0da2e8ca-0306-5a8f-9ebe-c5f7fc3fdf1f
+TabStyleWithAutomaticOption	int	4
+HideScrollbar	bool	true
+HideTab	bool	false
+UseBorder	bool	false
+DimBackgroundWindows	bool	true
+DimOnlyText	bool	false
+SeparateStatusBarsPerPane	bool	true
+EnableProxyIcon	bool	false
+ClickToSelectCommand	bool	true
+PreventEscapeSequenceFromClearingHistory	bool	true
+WordCharacters	string	/-+\~_.
+SoundForEsc	bool	false
+VisualIndicatorForEsc	bool	false
+HapticFeedbackForEsc	bool	false
+AppleWindowTabbingMode	string	manual
+ApplePressAndHoldEnabled	bool	false
+SuppressRestartAnnouncement	bool	true

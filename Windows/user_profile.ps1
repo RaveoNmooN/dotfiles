@@ -25,6 +25,9 @@ $aliases = @{
     'grep'  = 'findstr'
     'g'     = 'git'
     'k'     = 'kubectl'
+    'd'     = 'docker'
+    'dco'   = 'docker-compose'
+    'trf'   = 'terraform'
     'ls'    = 'Get-ChildItem'
     'cat'   = 'Get-Content'
     'rm'    = 'Remove-Item'
@@ -41,14 +44,14 @@ if (Get-Command kubectl -ErrorAction SilentlyContinue) {
 }
 
 # Function that removes command/s from history based on match of a pattern
-# Usage example: 
+# Usage example:
 # Remove-CommandFromHistory "vault operator unseal"
 function Remove-CommandFromHistory {
     param (
         [Parameter(Mandatory=$true)]
         [string]$pattern
     )
-    
+
     $historyPath = (Get-PSReadlineOption).HistorySavePath
     if (Test-Path $historyPath) {
         $history = Get-Content $historyPath

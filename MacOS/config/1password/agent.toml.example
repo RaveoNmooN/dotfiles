@@ -1,0 +1,36 @@
+# ==============================================================================
+#  ~/.config/1Password/ssh/agent.toml - 1Password SSH agent key list
+# ==============================================================================
+#  Seeded once by install.sh from config/1password/agent.toml.example. After
+#  that the file is yours: the installer never replaces it.
+#
+#  The agent offers the keys below, in this order. Each [[ssh-keys]] entry can
+#  narrow the selection with:
+#    item     name or ID of one SSH key item
+#    vault    name or ID of a vault
+#    account  sign-in address or ID of a 1Password account
+#
+#  Test the result with:
+#    SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -l
+#
+#  Reference: https://developer.1password.com/docs/ssh/agent/config
+# ==============================================================================
+
+# --- One specific key (uncomment and replace the placeholders) ------------------
+# List specific keys first, so they are offered before the catch-all below.
+#
+# [[ssh-keys]]
+# item = "<item name>"
+# vault = "<vault name>"
+# account = "<account name>"
+
+# --- Every SSH key of one vault -------------------------------------------------
+#
+# [[ssh-keys]]
+# vault = "<vault name>"
+
+# --- Default: every SSH key in the Private vault --------------------------------
+# This is what 1Password does when the file does not exist.
+
+[[ssh-keys]]
+vault = "Private"

@@ -1,0 +1,16 @@
+# ==============================================================================
+#  ~/.gitignore_global - ignore rules for every repository on this Mac
+# ==============================================================================
+#  Named by core.excludesfile in ~/.gitconfig. Sourcetree uses the same file
+#  and setting, so the two stay in agreement.
+#  Keep it to personal clutter. Project rules belong in the project .gitignore.
+# ==============================================================================
+
+# macOS
+.DS_Store
+
+# Editor backup files
+*~
+
+# Local Claude Code settings
+**/.claude/settings.local.json

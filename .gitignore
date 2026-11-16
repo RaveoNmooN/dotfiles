@@ -1,0 +1,99 @@
+# This repository is public. Everything below is a safety net: none of it
+# belongs in a commit.
+
+# ------------------------------------------------------------------------------
+#  Operating system and editors
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+# Only the shared workspace settings are tracked.
+.vscode/*
+!.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# ------------------------------------------------------------------------------
+#  Generated files, caches and leftovers
+# ------------------------------------------------------------------------------
+.dotfiles-backup/
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.cache/
+.venv/
+venv/
+node_modules/
+.terraform/
+*.log
+*.pkg
+*.whl
+*.orig
+*.rej
+*.bak
+
+# ------------------------------------------------------------------------------
+#  SSH: keys, host history and real client configs
+# ------------------------------------------------------------------------------
+# Only the starter file config/ssh/config.example is tracked.
+.ssh/
+known_hosts*
+*.pub
+*.pem
+*.key
+id_ed25519
+id_rsa
+ec2_instance_connect
+MacOS/config/ssh/*
+!MacOS/config/ssh/config.example
+
+# ------------------------------------------------------------------------------
+#  1Password: only the starter file agent.toml.example is tracked
+# ------------------------------------------------------------------------------
+MacOS/config/1password/*
+!MacOS/config/1password/agent.toml.example
+
+# ------------------------------------------------------------------------------
+#  Cloud and cluster credentials
+# ------------------------------------------------------------------------------
+.aws/
+aws/credentials
+aws/sso/
+.kube/
+kubeconfig*
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# ------------------------------------------------------------------------------
+#  Secrets, tokens and password stores
+# ------------------------------------------------------------------------------
+*.token
+*.secret
+*.password
+*.p12
+*.pfx
+*.kdbx
+.netrc
+.env
+.env.*
+
+# ------------------------------------------------------------------------------
+#  Shell history and machine-local configuration
+# ------------------------------------------------------------------------------
+.zsh_history
+.bash_history
+.gitconfig.local
+.bashrc.local
+local.zsh
+
+# ------------------------------------------------------------------------------
+#  App files that hold machine data
+# ------------------------------------------------------------------------------
+*.plist
+# The LaunchAgent definition is a tracked file, not machine data.
+!MacOS/config/keyboard/*.plist

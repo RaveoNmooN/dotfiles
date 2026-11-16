@@ -1,0 +1,35 @@
+# Default: normalize text
+* text=auto
+
+# Always use LF in repo
+* text eol=lf
+
+# Python
+*.py     text eol=lf
+
+# YAML/JSON/TOML
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.json   text eol=lf
+*.toml   text eol=lf
+
+# Shell scripts
+*.sh     text eol=lf
+*.zsh    text eol=lf
+
+# Improve diff for markdown files
+*.md  text diff=markdown
+
+# Treat common binaries as binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.zip    binary
+*.gz     binary
+*.tgz    binary
+
+# Don't include local/tooling folders in archives
+.idea/           export-ignore
+.vscode/         export-ignore

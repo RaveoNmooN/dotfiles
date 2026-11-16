@@ -1,0 +1,42 @@
+Product	Source	Recovery action	Discovery names
+1Password	Vendor (original download unverified)	Install 1Password for Mac. Sign in and enable the CLI integration and SSH agent if used.	app:1Password
+AltTab	Vendor (unverified)	Install AltTab for macOS and grant its requested accessibility permissions.	app:AltTab
+AnyDesk	Vendor (unverified)	Install AnyDesk for macOS when remote desktop access is needed.	app:AnyDesk
+Bruno, DBeaver and Radar	Homebrew casks	Installed by the Brewfile.	app:Bruno|app:DBeaver|app:Radar
+ChatGPT	Vendor (unverified)	Install the OpenAI macOS app and sign in. Its embedded tools come with the app.	app:ChatGPT
+Claude	Vendor (unverified)	Install Claude Desktop for macOS and sign in.	app:Claude
+Claude Code	Native CLI	Use Anthropic’s native installer. The user-local CLI and its URL handler belong to Claude Code. Restore personal skills and instructions from your private backup.	bin:claude|app:Claude Code URL Handler
+DataGrip	Vendor (unverified)	Install the JetBrains macOS distribution. Activate the license and restore IDE settings through your account or settings export.	app:DataGrip
+DisplayLink Manager	Vendor package	Install Synaptics DisplayLink Manager on machines using the dock. Includes the login screen extension.	app:DisplayLink Manager
+Docker Desktop	Vendor (unverified)	Install Docker Desktop for the Mac architecture. Enable its CLI links. Its Compose, credential and Kubernetes helpers are bundled. Older cagent, docker-index and hub-tool links on the source Mac have missing targets.	app:Docker|bin:docker|bin:docker-compose|bin:docker-credential-desktop|bin:docker-credential-osxkeychain|bin:kubectl|bin:kubectl.docker
+Google Chrome	Vendor (unverified)	Install Google Chrome and sign in to the desired browser profile.	app:Google Chrome
+Jabra Direct	Vendor package	Install Jabra Direct for the headset. Its firmware updater is included.	app:Jabra Direct|app:Jabra Firmware Update
+KeyStore Explorer	Vendor (unverified)	Install the macOS build of KeyStore Explorer.	app:KeyStore Explorer
+Lens	Vendor (unverified)	Install Lens Desktop and enable its CLI. Reconnect clusters through local configuration.	app:Lens|bin:lens
+Microsoft 365	Microsoft packages	Install Word, Excel, PowerPoint, OneNote, Outlook, Teams and OneDrive as licensed. Includes the Copilot shim, AutoUpdate, proofing and Teams audio components.	app:Microsoft Word|app:Microsoft Excel|app:Microsoft PowerPoint|app:Microsoft OneNote|app:Microsoft Outlook|app:Microsoft Teams|app:OneDrive|app:Microsoft 365 Copilot Shim
+Microsoft To Do	Mac App Store	Download Microsoft To Do from the App Store and sign in.	app:Microsoft To Do
+Multipass	Canonical package	Install Multipass for macOS. Its CLI and service are included.	app:Multipass|bin:multipass
+Obsidian	Vendor (unverified)	Install Obsidian, enable its CLI if wanted and reopen your restored vault.	app:Obsidian|bin:obsidian
+Postman	Vendor (unverified)	Install Postman Desktop and sign in. Install the separate Postman CLI using its macOS installer.	app:Postman|bin:postman
+Raycast	Vendor (unverified)	Install Raycast and use its settings import or account sync.	app:Raycast
+Royal TSX	Vendor (unverified)	Install Royal TSX from Royal Apps, activate it and reopen your privately backed-up connections.	app:Royal TSX
+Safari	macOS	Included with macOS.	app:Safari
+Sourcetree	Vendor (unverified)	Install Atlassian Sourcetree and reconnect accounts locally.	app:Sourcetree
+Spotify	Vendor (unverified)	Install Spotify Desktop and sign in.	app:Spotify
+Visual Studio Code	Vendor (unverified)	Install VS Code for macOS. Sign in and turn on Settings Sync. Run its Shell Command to install code in PATH for Git.	app:Visual Studio Code|bin:code
+iTerm2	Vendor (unverified)	Install iTerm2. Select the restored Dotfiles Main Profile as default.	app:iTerm
+Logi Options+	Vendor package	Install Logi Options+ on machines using Logitech devices. Its driver installer and plugin service are bundled.	app:logioptionsplus|app:LogiPluginService|app:Logi Options+ Driver Installer
+Zoom	Vendor package	Install Zoom Workplace for macOS and sign in.	app:zoom.us
+Apple Command Line Tools and Git	Apple installer	Run xcode-select --install before cloning.	clt:CommandLineTools
+AWS CLI v2	AWS vendor package	Bootstrap installs the signed AWS package. Configure the appropriate account separately.	bin:aws|bin:aws_completer
+Miniconda	Anaconda package	Bootstrap installs Miniconda base. Create environments as needed.	opt:miniconda3
+Apache Kafka	Apache binary distribution (source unverified)	Unpack kafka_2.13-3.9.1 from the Apache Kafka archive under /opt for its command-line tools.	opt:kafka_2.13-3.9.1
+Go language tools	User Go bin (installer unverified)	With a Go toolchain available, run go install golang.org/x/tools/gopls@v0.23.0 and go install honnef.co/go/tools/cmd/staticcheck@v0.6.1.	bin:gopls|bin:staticcheck
+Hack Nerd Font	Nerd Fonts 3.2.1	Bootstrap installs the twelve verified Hack, Mono and Propo font files.	font:HackNerdFont|font:HackNerdFontMono|font:HackNerdFontPropo
+Oh My Zsh	Upstream shell installer	Bootstrap installs the shell framework.	framework:oh-my-zsh
+Helm mapkubeapis	Helm plugin v0.5.1	Use helm plugin install https://github.com/helm/helm-mapkubeapis --version v0.5.1 with a compatible Helm version.	helm:helm-mapkubeapis
+GitHub Copilot CLI extension	GitHub CLI extension v1.1.1	Legacy github/gh-copilot is present. Restore only if needed and the release is available with gh extension install github/gh-copilot --pin v1.1.1.	gh:gh-copilot
+1Password Connect collection	Ansible Galaxy	Activate the Ansible environment and run ansible-galaxy collection install onepassword.connect:2.3.0.	galaxy:onepassword.connect
+PostgreSQL collection	Ansible Galaxy receipt only	Receipt records community.postgresql 3.7.0, but the collection directory is absent. Optional install with ansible-galaxy collection install community.postgresql:3.7.0.	receipt:community.postgresql
+OpenJDK 21 registration	Homebrew plus macOS JDK symlink	Register the Brew JDK with macOS if Java apps such as the Kafka tools need it: sudo ln -sfn $(brew --prefix openjdk@21)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk	jdk:openjdk-21.jdk
+Homebrew	Upstream installer	Bootstrap installs Homebrew and the Brewfile.	opt:homebrew

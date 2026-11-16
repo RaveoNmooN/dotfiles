@@ -1,0 +1,9 @@
+# Discovery-only filters. Each line is a case-insensitive shell pattern that
+# scripts/inventory.py ignores, both in the repo lists and on this Mac.
+# Use it for software you install by hand on purpose and do not want reported.
+cask:hashicorp-vagrant
+cask:hashicorp/tap/hashicorp-vagrant
+opt:vagrant
+bin:vagrant*
+app:headlamp
+cask:headlamp
